@@ -137,7 +137,6 @@ nav h1 a {
 
 .filter-options {
   width: 100%;
-  height: 50px;
   background-color: #3397DB;
   align-items: center;
 }
@@ -148,6 +147,7 @@ nav h1 a {
   font-weight: normal;
   line-height: 1;
   margin: 0 20px;
+  padding-top: 0.85em;
 }
 
 .filter-options select {
@@ -158,7 +158,7 @@ nav h1 a {
   letter-spacing: 0;
   margin: 10px;
   padding: 0 10px;
-  width: 200px;
+  width: calc(100% - 20px);
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -167,7 +167,7 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0;
-  padding: 30px 15px 60px;
+  padding: 30px 0px 60px;
   text-align: center;
 }
 
@@ -176,7 +176,7 @@ nav h1 a {
   border: 2px solid #ccc;
   margin: 15px;
   min-height: 380px;
-  padding: 0 30px 25px;
+  padding: 1em 30px 25px;
   text-align: left;
   max-width: 100%;
 }
@@ -185,9 +185,8 @@ nav h1 a {
   background-color: #ccc;
   display: block;
   margin: 0;
-  max-width: 100%;
-  min-height: 248px;
-  min-width: 100%;
+  width: 100%;
+  border-radius: 20px;
 }
 
 #restaurants-list li h1 {
@@ -326,6 +325,16 @@ nav h1 a {
 }
 
 /* Mobile first media queries */
+
+@media (min-width: 27.813em) {
+  .filter-options select {
+    width: 200px;
+  }
+
+  #restaurants-list { 
+    padding: 30px 15px 60px;
+  }
+}
 
 @media (min-width: 30em) {
   nav {
