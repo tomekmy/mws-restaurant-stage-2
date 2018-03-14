@@ -171,8 +171,9 @@ class DBHelper {
   static webpSourceForRestaurant (restaurant) {
     let srcset = '';
     restaurant.responsive.forEach(element => {
-      element = element.substring(0, element.lastIndexOf('.') + 1);
-      srcset += `/img/${element}webp, `;
+      element = element.replace('.jpg', '.webp');
+      element = element.replace('.png', '.webp');
+      srcset += `/img/${element},`;
     });
     return srcset;
   }
