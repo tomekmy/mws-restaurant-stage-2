@@ -21,7 +21,7 @@ a:focus {
   text-decoration: none;
 }
 
-a img {
+a img, a picture {
   border: none;
 }
 
