@@ -356,10 +356,14 @@ nav h1 a {
     font-size: 1.17em;
     letter-spacing: 0.625em;
   }
-}
 
-@media (min-width: 56em) {
   #restaurants-list { 
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 70em) {
+  #restaurants-list { 
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
