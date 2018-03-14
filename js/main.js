@@ -137,16 +137,17 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
-
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
-  // Add srcset
-  image.srcset = DBHelper.imageSrcsetForRestaurant(restaurant);
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  // Add alt text
-  image.alt = restaurant.name + ' restaurant';
-  li.append(image);
+  /**
+   * Create picture element and fill it with data.
+   */
+  const picture = document.createElement('picture');
+  const sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
+  picture.insertAdjacentHTML('afterbegin', `
+    <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
+    <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
+    <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
+  `);
+  li.append(picture);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
