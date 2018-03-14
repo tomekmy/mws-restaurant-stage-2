@@ -154,12 +154,25 @@ class DBHelper {
   }
 
   /**
-   * Return set of responsive restaurant images
+   * Return set of responsive restaurant JPG images
    */
-  static imageSrcsetForRestaurant (restaurant) {
+  static imageSourceForRestaurant (restaurant) {
     let srcset = '';
     restaurant.responsive.forEach(element => {
       srcset += `/img/${element},`;
+    });
+    return srcset;
+  }
+
+  /**
+   * Return set of responsive restaurant WEBP images
+   * Just replace file extension to webp
+   */
+  static webpSourceForRestaurant (restaurant) {
+    let srcset = '';
+    restaurant.responsive.forEach(element => {
+      element = element.substring(0, element.lastIndexOf('.') + 1);
+      srcset += `/img/${element}webp, `;
     });
     return srcset;
   }
