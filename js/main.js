@@ -81,7 +81,17 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-}
+
+  // Remove Google map from tab order
+  // self.map.addListener('tilesloaded', function () {
+  //   setTimeout(() => {
+  //     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
+  //       item.setAttribute('tabindex', '-1');
+  //       console.log(item);
+  //     });
+  //   }, 1000);
+  // });
+};
 
 /**
  * Update page and map for current restaurants.
@@ -130,7 +140,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
-}
+};
 
 /**
  * Create restaurant HTML.
@@ -142,11 +152,11 @@ createRestaurantHTML = (restaurant) => {
    */
   const picture = document.createElement('picture');
   const sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
-  picture.insertAdjacentHTML('afterbegin', `
+  picture.innerHTML = `
     <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
     <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
     <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
-  `);
+  `;
   li.append(picture);
 
   const name = document.createElement('h1');
@@ -163,11 +173,13 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute('role', 'button');
+  more.setAttribute('aria-label', `${restaurant.name}. View details`);
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
-  return li
-}
+  return li;
+};
 
 /**
  * Add markers for current restaurants to the map.
@@ -177,8 +189,14 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
     google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
+      window.location.href = marker.url;
     });
     self.markers.push(marker);
   });
-}
+  // Remove Google map elements from tab order
+  window.setTimeout(() => {
+    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
+      item.setAttribute('tabindex', '-1');
+    });
+  }, 500);
+};
