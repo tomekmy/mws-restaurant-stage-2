@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchCuisines();
 });
 
+// Remove Google map elements from tab order when page (google maps and markers) is loaded
+window.onload = () => {
+  // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM
+  window.setTimeout(() => {
+    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
+      item.setAttribute('tabindex', '-1');
+    });
+  }, 1000);
+};
+
 /**
  * Fetch all neighborhoods and set their HTML.
  */
@@ -81,16 +91,6 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-
-  // Remove Google map from tab order
-  // self.map.addListener('tilesloaded', function () {
-  //   setTimeout(() => {
-  //     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
-  //       item.setAttribute('tabindex', '-1');
-  //       console.log(item);
-  //     });
-  //   }, 1000);
-  // });
 };
 
 /**
@@ -193,10 +193,11 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     });
     self.markers.push(marker);
   });
-  // Remove Google map elements from tab order
+  // Remove Google map elements from tab order when changing filter
+  // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM  
   window.setTimeout(() => {
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
     });
-  }, 500);
+  }, 1000);
 };
