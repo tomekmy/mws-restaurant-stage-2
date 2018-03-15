@@ -10,6 +10,10 @@ body {
   position: relative;
 }
 
+:focus {
+  outline: 2px dashed red;
+}
+
 a {
   color: orange;
   text-decoration: none;
