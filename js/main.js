@@ -27,7 +27,6 @@ window.onresize = () => {
   window.setTimeout(() => {
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
-      console.log('onresize');
     });
   }, 500);
 };
@@ -55,7 +54,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
-    select.append(option);
+    select.insertAdjacentElement('beforeend', option);
   });
 }
 
@@ -83,7 +82,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
-    select.append(option);
+    select.insertAdjacentElement('beforeend', option);
   });
 }
 
@@ -155,7 +154,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 
   if (restaurants.length > 0) {
     restaurants.forEach(restaurant => {
-      ul.append(createRestaurantHTML(restaurant));
+      ul.insertAdjacentElement('beforeend', createRestaurantHTML(restaurant));
     });
   } else {
     // Add info text when no restaurants found
@@ -174,31 +173,31 @@ createRestaurantHTML = (restaurant) => {
    */
   const picture = document.createElement('picture');
   const sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
-  picture.insertAdjacentHTML('afterbegin', `
+  picture.insertAdjacentHTML('beforeend', `
     <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
     <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
     <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
   `);
-  li.append(picture);
+  li.insertAdjacentElement('beforeend', picture);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
-  li.append(name);
+  li.insertAdjacentElement('beforeend', name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  li.insertAdjacentElement('beforeend', neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  li.append(address);
+  li.insertAdjacentElement('beforeend', address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.setAttribute('role', 'button');
   more.setAttribute('aria-label', `${restaurant.name}. View details`);
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more);
+  li.insertAdjacentElement('beforeend', more);
 
   return li;
 };
