@@ -15,13 +15,13 @@ body {
 }
 
 a {
-  color: orange;
+  color: #ffffff;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #3397db;
+  color: #5297d2;
   text-decoration: none;
 }
 
@@ -60,7 +60,7 @@ section {
 
 #footer {
   background-color: #444;
-  color: #aaa;
+  color: #e0e0e0;
   font-size: 0.66em;
   letter-spacing: 1px;
   padding: 25px;
@@ -141,8 +141,10 @@ nav h1 a {
 
 .filter-options {
   width: 100%;
-  background-color: #3397DB;
-  align-items: center;
+  background-color: #00549c;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .filter-options h2 {
@@ -202,8 +204,8 @@ nav h1 a {
   border-radius: 20px;
 }
 
-#restaurants-list li h1 {
-  color: #f18200;
+#restaurants-list li h2 {
+  color: #00549c;
   font-size: 1.17em;
   font-weight: 400;
   letter-spacing: 0;
@@ -218,7 +220,7 @@ nav h1 a {
 }
 
 #restaurants-list li a {
-  background-color: orange;
+  background-color: #00549c;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;
