@@ -18,8 +18,19 @@ window.onload = () => {
   window.setTimeout(() => {
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
+      console.log('onload');
     });
   }, 1000);
+};
+
+window.onresize = () => {
+  // Remove Google map elements from tab order when page is resized
+  window.setTimeout(() => {
+    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
+      item.setAttribute('tabindex', '-1');
+      console.log('onresize');
+    });
+  }, 500);
 };
 
 /**
@@ -135,10 +146,15 @@ resetRestaurants = (restaurants) => {
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
+  console.log(restaurants.length);
   const ul = document.getElementById('restaurants-list');
-  restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
-  });
+  if (restaurants.length > 0) {
+    restaurants.forEach(restaurant => {
+      ul.append(createRestaurantHTML(restaurant));
+    });
+  } else {
+    ul.insertAdjacentHTML('beforebegin', '<h4 class="no-restaurants">No restaurants found:(</h4>');
+  }
   addMarkersToMap();
 };
 
@@ -196,8 +212,10 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   // Remove Google map elements from tab order when changing filter
   // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM  
   window.setTimeout(() => {
+    // console.clear();
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
+      console.log('marker');
     });
   }, 1000);
 };
