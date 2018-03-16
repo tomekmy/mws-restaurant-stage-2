@@ -5,9 +5,13 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #333;
   line-height: 1.5;
-  background-color: #fdfdfd;
+  background-color: #f3f3f3;
   margin: 0;
   position: relative;
+}
+
+html, body {
+  height: 100%;
 }
 
 :focus {
@@ -53,6 +57,11 @@ section {
   display: block;
 }
 
+#wrapper {
+  min-height: 100%;
+  margin-bottom: -4.063em;
+}
+
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
@@ -63,7 +72,7 @@ section {
   color: #e0e0e0;
   font-size: 0.66em;
   letter-spacing: 1px;
-  padding: 25px;
+  padding: 1.563rem;
   text-align: center;
   text-transform: uppercase;
 }
@@ -175,7 +184,7 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0;
-  padding: 1em 0;
+  padding: 1em 0 5em 0;
   text-align: center;
 }
 
