@@ -12,10 +12,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchCuisines();
 });
 
-// Remove Google map elements from tab order when page (google maps and markers) is loaded
 window.onload = () => {
-  // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM
   window.setTimeout(() => {
+    // Add title to Google Maps iframe
+    document.querySelectorAll('#map iframe').forEach((item) => {
+      item.setAttribute('title', 'Google maps iframe');
+    });
+    // Remove Google map elements from tab order when page (google maps and markers) is loaded
+    // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
     });
@@ -180,7 +184,7 @@ createRestaurantHTML = (restaurant) => {
   `);
   li.insertAdjacentElement('beforeend', picture);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.insertAdjacentElement('beforeend', name);
 
