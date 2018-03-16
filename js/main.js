@@ -146,11 +146,19 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
+  // Remove no restaurants info
+  const parent = document.getElementById('main-content-wrapper');
+  const child = document.getElementsByClassName('no-restaurants')[0];
+  if (child) {
+    parent.removeChild(child);
+  }
+
   if (restaurants.length > 0) {
     restaurants.forEach(restaurant => {
       ul.append(createRestaurantHTML(restaurant));
     });
   } else {
+    // Add info text when no restaurants found
     ul.insertAdjacentHTML('beforebegin', '<h4 class="no-restaurants">No restaurants found:(</h4>');
   }
   addMarkersToMap();
