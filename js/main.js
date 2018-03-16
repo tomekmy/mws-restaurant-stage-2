@@ -18,7 +18,6 @@ window.onload = () => {
   window.setTimeout(() => {
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
-      console.log('onload');
     });
   }, 1000);
 };
@@ -146,7 +145,6 @@ resetRestaurants = (restaurants) => {
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
-  console.log(restaurants.length);
   const ul = document.getElementById('restaurants-list');
   if (restaurants.length > 0) {
     restaurants.forEach(restaurant => {
@@ -168,11 +166,11 @@ createRestaurantHTML = (restaurant) => {
    */
   const picture = document.createElement('picture');
   const sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
-  picture.innerHTML = `
+  picture.insertAdjacentHTML('afterbegin', `
     <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
     <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
     <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
-  `;
+  `);
   li.append(picture);
 
   const name = document.createElement('h1');
@@ -212,10 +210,8 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   // Remove Google map elements from tab order when changing filter
   // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM  
   window.setTimeout(() => {
-    // console.clear();
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
-      console.log('marker');
     });
   }, 1000);
 };
