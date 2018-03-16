@@ -177,6 +177,11 @@ nav h1 a {
   text-align: center;
 }
 
+.no-restaurants {
+  text-align: center;
+  margin: 3em 3em 1em;
+}
+
 #restaurants-list li {
   background-color: #fff;
   border: 2px solid #ccc;
