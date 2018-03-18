@@ -20,18 +20,14 @@ window.onload = () => {
     });
     // Remove Google map elements from tab order when page (google maps and markers) is loaded
     // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM
-    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
-      item.setAttribute('tabindex', '-1');
-    });
+    DBHelper.removeMapsTabOrder();
   }, 1000);
 };
 
 window.onresize = () => {
   // Remove Google map elements from tab order when page is resized
   window.setTimeout(() => {
-    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
-      item.setAttribute('tabindex', '-1');
-    });
+    DBHelper.removeMapsTabOrder();
   }, 500);
 };
 
@@ -221,8 +217,6 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   // Remove Google map elements from tab order when changing filter
   // Maps and markers has an animation so I add a little timeout to allow all maps elements appear in the DOM  
   window.setTimeout(() => {
-    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
-      item.setAttribute('tabindex', '-1');
-    });
+    DBHelper.removeMapsTabOrder();
   }, 1000);
 };
