@@ -20,15 +20,17 @@
       <!-- Beginning nav -->
       <nav>
         <h1>
-          <a href="/">Restaurant Reviews</a>
+          <a href="/" aria-label="Restaurant reviews main page">Restaurant Reviews</a>
         </h1>
       </nav>
       <!-- Beginning breadcrumb -->
-      <ul id="breadcrumb">
-        <li>
-          <a href="/">Home</a>
-        </li>
-      </ul>
+      <nav id="breadcrumb-nav">
+        <ul id="breadcrumb">
+          <li>
+            <a href="/" aria-label="Back to main page">Home</a>
+          </li>
+        </ul>
+      </nav>
       <!-- End breadcrumb -->
       <!-- End nav -->
     </header>
@@ -42,12 +44,16 @@
       </section>
       <!-- End map -->
       <!-- Beginning restaurant -->
+      <p id="restaurant-cuisine"></p>
       <section id="restaurant-container">
-        <h1 id="restaurant-name"></h1>
-        <img id="restaurant-img">
-        <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
-        <table id="restaurant-hours"></table>
+        <div>
+          <h1 id="restaurant-name"></h1>
+          <img id="restaurant-img">
+        </div>
+        <div>
+          <p id="restaurant-address"></p>
+          <table id="restaurant-hours"></table>
+        </div>
       </section>
       <!-- end restaurant -->
       <!-- Beginning reviews -->
@@ -60,10 +66,7 @@
 
     <!-- Beginning footer -->
     <footer id="footer">
-      Copyright (c) 2017
-      <a href="/">
-        <strong>Restaurant Reviews</strong>
-      </a> All Rights Reserved.
+      Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
     <!-- End footer -->
 
