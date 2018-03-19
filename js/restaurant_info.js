@@ -129,24 +129,19 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
-  name.innerHTML = review.name;
-  li.appendChild(name);
-
-  const date = document.createElement('p');
-  date.innerHTML = review.date;
-  li.appendChild(date);
-
-  const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
-
-  const comments = document.createElement('p');
-  comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  li.insertAdjacentHTML('beforeend', `
+    <div id="review-header">
+      <span id="review-name">${review.name}</span>
+      <span id="review-date">${review.date}</span>
+    </div>
+    <div id="review-content">
+      <div id="review-rating">Rating: ${review.rating}</div>
+      <div id="review-text">${review.comments}</div>
+    </div>
+  `);
 
   return li;
-}
+};
 
 /**
  * Add restaurant name to the breadcrumb navigation menu
