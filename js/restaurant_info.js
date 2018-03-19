@@ -68,8 +68,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  const sizes = '(min-width: 1200px) 700px, (min-width: 770px) 450px, (min-width: 46em) 350px';
+  image.insertAdjacentHTML('beforeend', `
+    <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
+    <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
+    <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
+  `);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -80,7 +84,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   fillReviewsHTML();
-}
+};
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
@@ -130,13 +134,13 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   const li = document.createElement('li');
   li.insertAdjacentHTML('beforeend', `
-    <div id="review-header">
-      <span id="review-name">${review.name}</span>
-      <span id="review-date">${review.date}</span>
+    <div class="review-header">
+      <span class="review-name">${review.name}</span>
+      <span class="review-date">${review.date}</span>
     </div>
-    <div id="review-content">
-      <div id="review-rating">Rating: ${review.rating}</div>
-      <div id="review-text">${review.comments}</div>
+    <div class="review-content">
+      <div class="review-rating">Rating: ${review.rating}</div>
+      <div class="review-text">${review.comments}</div>
     </div>
   `);
 
