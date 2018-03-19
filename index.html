@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Application to find the best restaurant on the word.">
+    <link rel="manifest" href="manifest.json">
     <!-- Normalize.css for better cross-browser consistency -->
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css">
     <!-- Google Web Font -->
@@ -46,7 +47,15 @@
     <footer id="footer">
       Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
-    
+    <script>
+      // Check that service workers are registered
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
     <script defer type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
     <script defer type="application/javascript" charset="utf-8" src="js/main.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTyFdrSH8mZ6JHxnR2YBK6NSVSOZgg8Ug&libraries=places&callback=initMap"></script>
