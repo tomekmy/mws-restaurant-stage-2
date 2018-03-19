@@ -96,6 +96,7 @@ nav h1 {
 nav h1 a {
   color: #fff;
   font-size: 0.8em;
+  font-weight: 300;
   letter-spacing: 0.3em;
   text-transform: uppercase;
 }
@@ -130,7 +131,7 @@ nav h1 a {
 /* Add a color to all links inside the list */
 
 #breadcrumb li a {
-  color: #0275d8;
+  color: #00549c;
   text-decoration: none;
 }
 
@@ -283,7 +284,7 @@ nav h1 a {
   line-height: 1.1;
 }
 
-#restaurant-img {
+.restaurant-img {
   width: 100%;
   border-top-left-radius: 1.250em;
   border-bottom-right-radius: 1.250em;
@@ -307,7 +308,7 @@ nav h1 a {
 
 #restaurant-container {
   display: grid;
-  grid-template-columns: 55% 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 2%;
 }
 
@@ -317,10 +318,6 @@ nav h1 a {
   /* border-top: 1px solid #fff; */
   padding: 2em 3%;
   /* width: 50%; */
-}
-
-#reviews-container {
-  
 }
 
 #reviews-container h2 {
@@ -351,23 +348,19 @@ nav h1 a {
   margin: 0 0 0.625em;
 }
 
-#review-header {
+.review-header {
   color: #ffffff;
   background-color: #333333;
   padding: 1em 1.5em;
 }
 
-#review-name {
-
-}
-
-#review-date {
+.review-date {
   float: right;
   color: #dadada;
   font-size: 0.9em;
 }
 
-#review-rating {
+.review-rating {
   color: #ffffff;
   font-size: 0.9em;
   background-color: #00549c;
@@ -378,7 +371,7 @@ nav h1 a {
   text-transform: uppercase;
 }
 
-#review-text {
+.review-text {
   padding: 0.5em 1.5em 1.5em;
 }
 
@@ -403,7 +396,6 @@ nav h1 a {
   nav h1 a {
     font-size: 0.9em;
     letter-spacing: 0.55em;
-    font-weight: 300;
   }
 }
 
@@ -415,6 +407,12 @@ nav h1 a {
 
   #restaurants-list { 
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 46em) {
+  #restaurant-container {
+    grid-template-columns: 55% 1fr;
   }
 }
 
