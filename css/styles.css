@@ -96,7 +96,6 @@ nav h1 {
 nav h1 a {
   color: #fff;
   font-size: 0.8em;
-  font-weight: 300;
   letter-spacing: 0.3em;
   text-transform: uppercase;
 }
@@ -275,9 +274,9 @@ nav h1 a {
 } */
 
 #restaurant-name {
-  color: #f18200;
+  color: #00549c;
   font-size: 1.67em;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: 0;
   margin: 0.938em 0 1.875em;
   text-transform: uppercase;
@@ -286,11 +285,13 @@ nav h1 a {
 
 #restaurant-img {
   width: 100%;
+  border-top-left-radius: 1.250em;
+  border-bottom-right-radius: 1.250em;
 }
 
 #restaurant-address {
-  font-size: 1em;
-  margin: 0.625em 0px;
+  font-size: 1.2em;
+  margin: 1.3em 0 2em;
 }
 
 #restaurant-cuisine {
@@ -302,32 +303,31 @@ nav h1 a {
   padding: 0.7em;
   text-align: center;
   text-transform: uppercase;
-  width: 100%;
 }
 
 #restaurant-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 55% 1fr;
+  grid-gap: 2%;
 }
 
 #restaurant-container,
 #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   /* border-top: 1px solid #fff; */
-  padding: 4.375em 3% 1.875em;
+  padding: 2em 3%;
   /* width: 50%; */
 }
 
 #reviews-container {
-  padding: 1.875em 2.500em 5.000em;
+  
 }
 
 #reviews-container h2 {
-  color: #f58500;
-  font-size: 2em;
+  color: #00549c;
+  font-size: 1.6em;
   font-weight: 300;
   letter-spacing: -0.063em;
-  padding-bottom: 0.083em;
 }
 
 #reviews-list {
@@ -342,17 +342,49 @@ nav h1 a {
   list-style-type: none;
   margin: 0 0 1.875em;
   overflow: hidden;
-  padding: 0 1.250em 1.250em;
   position: relative;
-  width: calc(100% - 2.500em);
+  border-top-left-radius: 1.250em;
+  border-bottom-right-radius: 1.250em;
 }
 
 #reviews-list li p {
   margin: 0 0 0.625em;
 }
 
+#review-header {
+  color: #ffffff;
+  background-color: #333333;
+  padding: 1em 1.5em;
+}
+
+#review-name {
+
+}
+
+#review-date {
+  float: right;
+  color: #dadada;
+  font-size: 0.9em;
+}
+
+#review-rating {
+  color: #ffffff;
+  font-size: 0.9em;
+  background-color: #00549c;
+  margin: 0.8em 1.5em;
+  padding: 0.3em 0.9em;
+  display: inline-block;
+  border-radius: 0.3em;
+  text-transform: uppercase;
+}
+
+#review-text {
+  padding: 0.5em 1.5em 1.5em;
+}
+
 #restaurant-hours td {
   color: #666;
+  padding: 0.4em;
 }
 
 /* Mobile first media queries */
@@ -371,6 +403,7 @@ nav h1 a {
   nav h1 a {
     font-size: 0.9em;
     letter-spacing: 0.55em;
+    font-weight: 300;
   }
 }
 
