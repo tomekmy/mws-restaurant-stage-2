@@ -5,6 +5,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Application to find the best restaurant on the word.">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="msapplication-TileImage" content="img/icons/mstile-144x144.png">
+    <meta name="theme-color" content="#3F51B5">
     <link rel="manifest" href="manifest.json">
     <!-- Normalize.css for better cross-browser consistency -->
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css">
@@ -47,15 +55,6 @@
     <footer id="footer">
       Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
-    <script>
-      // Check that service workers are registered
-      if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js');
-        });
-      }
-    </script>
     <script defer type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
     <script defer type="application/javascript" charset="utf-8" src="js/main.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTyFdrSH8mZ6JHxnR2YBK6NSVSOZgg8Ug&libraries=places&callback=initMap"></script>
