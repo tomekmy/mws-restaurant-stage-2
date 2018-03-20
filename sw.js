@@ -1,6 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
 
 if (workbox) {
+  // Cache visited restaurant pages
   workbox.routing.registerRoute(
     new RegExp('restaurant.html(.*)'),
     workbox.strategies.networkFirst({
@@ -8,6 +9,7 @@ if (workbox) {
     })
   );
 
+  // Cache Google Fonts
   workbox.routing.registerRoute(
     new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'),
     workbox.strategies.cacheFirst({
@@ -20,11 +22,13 @@ if (workbox) {
     })
   );
 
+  // Cache Google Maps requests
   workbox.routing.registerRoute(
     new RegExp('https://maps.googleapis.com/maps/api/(.*)'),
     workbox.strategies.networkFirst()
   );
 
+  // Cache requested images
   workbox.routing.registerRoute(
     /\.(?:png|gif|jpg|jpeg|svg|webp)$/,
     workbox.strategies.cacheFirst({
@@ -38,6 +42,7 @@ if (workbox) {
     })
   );
 
+  // Cache js, css and json files
   workbox.routing.registerRoute(
     /\.(?:js|css|json)$/,
     workbox.strategies.staleWhileRevalidate({
@@ -45,6 +50,7 @@ if (workbox) {
     })
   );
 
+  // Precache static html files
   workbox.precaching.precacheAndRoute([
     '/index.html',
     '/restaurant.html'
