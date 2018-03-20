@@ -158,7 +158,7 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant) {
     let src = restaurant.responsive;
     src = src[src.length - 1].split(' ')[0];
-    return (`/img/${src}`);
+    return (`img/${src}`);
   }
 
   /**
@@ -167,7 +167,7 @@ class DBHelper {
   static imageSourceForRestaurant(restaurant) {
     let srcset = '';
     restaurant.responsive.forEach(element => {
-      srcset += `/img/${element},`;
+      srcset += `img/${element},`;
     });
     return srcset;
   }
@@ -181,7 +181,7 @@ class DBHelper {
     restaurant.responsive.forEach(element => {
       element = element.replace('.jpg', '.webp');
       element = element.replace('.png', '.webp');
-      srcset += `/img/${element},`;
+      srcset += `img/${element},`;
     });
     return srcset;
   }
