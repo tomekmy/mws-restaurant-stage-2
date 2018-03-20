@@ -186,11 +186,12 @@ nav h1 a {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2em;
+  justify-items: center;
+  max-width: 4000px;
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 3em 2% 6em;
   padding: 0;
-  text-align: center;
 }
 
 .no-restaurants {
@@ -407,5 +408,9 @@ nav h1 a {
 @media (min-width: 250em) {
   body {
     font-size: 2em;
+  }
+
+  #restaurants-list {
+    margin: 3em auto 6em;
   }
 }
