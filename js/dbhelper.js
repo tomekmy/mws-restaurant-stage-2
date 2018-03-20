@@ -2,18 +2,26 @@
  * Common database helper functions.
  */
 class DBHelper {
+
+  // Register service worker
+  static registerSW() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  }
+
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
    */
-  static get DATABASE_URL () {
+  static get DATABASE_URL() {
     return 'data/restaurants.json';
   }
 
   /**
    * Fetch all restaurants.
    */
-  static fetchRestaurants (callback) {
+  static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
@@ -32,7 +40,7 @@ class DBHelper {
   /**
    * Fetch a restaurant by its ID.
    */
-  static fetchRestaurantById (id, callback) {
+  static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -51,7 +59,7 @@ class DBHelper {
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
-  static fetchRestaurantByCuisine (cuisine, callback) {
+  static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -67,7 +75,7 @@ class DBHelper {
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
    */
-  static fetchRestaurantByNeighborhood (neighborhood, callback) {
+  static fetchRestaurantByNeighborhood(neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -83,7 +91,7 @@ class DBHelper {
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
    */
-  static fetchRestaurantByCuisineAndNeighborhood (cuisine, neighborhood, callback) {
+  static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -104,7 +112,7 @@ class DBHelper {
   /**
    * Fetch all neighborhoods with proper error handling.
    */
-  static fetchNeighborhoods (callback) {
+  static fetchNeighborhoods(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -122,7 +130,7 @@ class DBHelper {
   /**
    * Fetch all cuisines with proper error handling.
    */
-  static fetchCuisines (callback) {
+  static fetchCuisines(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -140,14 +148,14 @@ class DBHelper {
   /**
    * Restaurant page URL.
    */
-  static urlForRestaurant (restaurant) {
+  static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
   }
 
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant (restaurant) {
+  static imageUrlForRestaurant(restaurant) {
     let src = restaurant.responsive;
     src = src[src.length - 1].split(' ')[0];
     return (`/img/${src}`);
@@ -156,7 +164,7 @@ class DBHelper {
   /**
    * Return set of responsive restaurant JPG images
    */
-  static imageSourceForRestaurant (restaurant) {
+  static imageSourceForRestaurant(restaurant) {
     let srcset = '';
     restaurant.responsive.forEach(element => {
       srcset += `/img/${element},`;
@@ -168,7 +176,7 @@ class DBHelper {
    * Return set of responsive restaurant WEBP images
    * Just replace file extension to webp
    */
-  static webpSourceForRestaurant (restaurant) {
+  static webpSourceForRestaurant(restaurant) {
     let srcset = '';
     restaurant.responsive.forEach(element => {
       element = element.replace('.jpg', '.webp');
@@ -181,7 +189,7 @@ class DBHelper {
   /**
    * Map marker for a restaurant.
    */
-  static mapMarkerForRestaurant (restaurant, map) {
+  static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
       title: restaurant.name,
@@ -192,7 +200,7 @@ class DBHelper {
     return marker;
   }
 
-  static removeMapsTabOrder () {
+  static removeMapsTabOrder() {
     document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
       item.setAttribute('tabindex', '-1');
     });

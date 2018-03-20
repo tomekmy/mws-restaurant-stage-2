@@ -2,6 +2,9 @@ let restaurant;
 var map;
 
 window.onload = () => {
+  // Register service worker
+  DBHelper.registerSW();
+
   window.setTimeout(() => {
     // Add title to Google Maps iframe
     document.querySelectorAll('#map iframe').forEach((item) => {
