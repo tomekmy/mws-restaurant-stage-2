@@ -52,8 +52,8 @@ if (workbox) {
 
   // Precache static html files
   workbox.precaching.precacheAndRoute([
-    '/index.html',
-    '/restaurant.html'
+    'index.html',
+    'restaurant.html'
   ]);
 } else {
   console.log(`Can't load Workbox :(`);
