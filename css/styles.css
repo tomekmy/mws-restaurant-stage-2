@@ -205,7 +205,7 @@ nav h1 a {
   border-bottom-right-radius: 1.250em;
   padding: 1em 3%;
   text-align: left;
-  max-width: 100%;
+  max-width: 800px;
 }
 
 #restaurants-list .restaurant-img {
@@ -245,34 +245,6 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Details ====================== */
-
-/* .inside header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-} */
-
-/* .inside #map-container {
-  background: blue none repeat scroll 0 0;
-  height: 87%;
-  position: fixed;
-  right: 0;
-  top: 80px;
-  width: 50%;
-}
-
-.inside #map {
-  background-color: #ccc;
-  height: 100%;
-  width: 100%;
-} */
-
-/* .inside #footer {
-  bottom: 0;
-  position: absolute;
-  width: 50%;
-} */
 
 #restaurant-name {
   color: #00549c;
@@ -425,6 +397,10 @@ nav h1 a {
 @media (min-width: 200em) {
   body {
     font-size: 1.6em;
+  }
+
+  #restaurants-list { 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
