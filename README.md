@@ -1,5 +1,7 @@
 # Mobile Web Specialist Certification Course
 ---
+**Online demo:** https://mysliwiec.pro/mws-restaurant-stage-1/index.html
+
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
 ## Project Overview: Stage 1
