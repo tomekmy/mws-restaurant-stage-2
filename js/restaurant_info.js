@@ -75,7 +75,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.insertAdjacentHTML('beforeend', `
     <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
     <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
-    <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.name} restaurant">
+    <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.alt}">
   `);
 
   const cuisine = document.getElementById('restaurant-cuisine');
