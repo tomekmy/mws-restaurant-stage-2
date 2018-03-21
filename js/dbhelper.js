@@ -192,7 +192,7 @@ class DBHelper {
   static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
-      title: restaurant.name,
+      title: restaurant.name + ' restaurant map marker',
       url: DBHelper.urlForRestaurant(restaurant),
       map: map,
       animation: google.maps.Animation.DROP
@@ -200,9 +200,16 @@ class DBHelper {
     return marker;
   }
 
-  static removeMapsTabOrder() {
-    document.querySelectorAll('#map div, #map iframe, #map area, #map a, #map button').forEach((item) => {
+  // Remove unnecessary tabbing from Google Maps
+  // Add title to map iframe element
+  // Add aria-label to main map div
+  static fixMaps() {
+    document.querySelectorAll('#map iframe').forEach((item) => {
       item.setAttribute('tabindex', '-1');
+      item.setAttribute('title', 'Google maps iframe');
+    });
+    document.querySelectorAll('#map [tabindex="0"]').forEach((item) => {
+      item.setAttribute('aria-label', 'Google maps with marked restaurants');
     });
   }
 }
