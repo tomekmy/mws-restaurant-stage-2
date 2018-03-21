@@ -148,9 +148,11 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
-  li.innerHTML = restaurant.name;
-  li.setAttribute('tabindex', '0');
-  li.setAttribute('aria-label', `Current restaurant ${restaurant.name}`);
+  li.insertAdjacentHTML('beforeend', `
+    <a href="" aria-current="page">
+      ${restaurant.name}
+    </a>
+  `);
   breadcrumb.appendChild(li);
 }
 
