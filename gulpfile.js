@@ -1,5 +1,14 @@
-var gulp = require('gulp');
+/* eslint-env node, mocha */
 
-gulp.task('default', function() {
-  // place code for your default task here
+const gulp = require('gulp');
+const htmlmin = require('gulp-htmlmin');
+
+gulp.task('minify', () => {
+  return gulp.src('src/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('default', () => {
+  gulp.start('minify');
 });
