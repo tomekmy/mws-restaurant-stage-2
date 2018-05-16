@@ -18,5 +18,8 @@
   "homepage": "https://github.com/tomekmy/mws-restaurant-stage-2#readme",
   "devDependencies": {
     "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "gulp-htmlmin": "^4.0.0"
   }
 }
