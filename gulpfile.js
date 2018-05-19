@@ -68,6 +68,18 @@ gulp.watch('src/js/*.js', (event) => {
   gulp.start(['uglify']);
 });
 
+// Watch service worker file
+gulp.watch('src/sw.js', (event) => {
+  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  gulp.start(['uglify-sw']);
+});
+
+// Watch manifest.json file
+gulp.watch('src/manifest.json', (event) => {
+  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  gulp.start(['copy-manifest']);
+});
+
 // Watch css files
 gulp.watch('src/css/*.css', (event) => {
   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
