@@ -65,9 +65,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   const sizes = '(min-width: 1200px) 700px, (min-width: 770px) 450px, (min-width: 46em) 350px';
   image.insertAdjacentHTML('beforeend', `
-    <source type="image/webp" sizes="${sizes}" srcset="${DBHelper.webpSourceForRestaurant(restaurant)}">
-    <source sizes="${sizes}" srcset="${DBHelper.imageSourceForRestaurant(restaurant)}">
-    <img class="restaurant-img" src="${DBHelper.imageUrlForRestaurant(restaurant)}" alt="${restaurant.alt}">
+    <source type="image/webp" sizes="${sizes}" srcset="img/${restaurant.photograph}_small.webp 350w, img/${restaurant.photograph}_medium.webp 600w, img/${restaurant.photograph}_large.webp 600w">
+    <source sizes="${sizes}" srcset="img/${restaurant.photograph}_small.jpg 350w, img/${restaurant.photograph}_medium.jpg 600w, img/${restaurant.photograph}_large.jpg 600w">
+    <img class="restaurant-img" src="img/${restaurant.photograph}.jpg" alt="${restaurant.name}">
   `);
 
   const cuisine = document.getElementById('restaurant-cuisine');
