@@ -22,6 +22,12 @@ if (workbox) {
     })
   );
 
+  // Cache restaurants requests
+  workbox.routing.registerRoute(
+    new RegExp('http://(.*)restaurants'),
+    workbox.strategies.networkFirst()
+  );
+
   // Cache Google Maps requests
   workbox.routing.registerRoute(
     new RegExp('https://maps.googleapis.com/maps/api/(.*)'),
