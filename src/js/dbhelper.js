@@ -28,7 +28,6 @@ class DBHelper {
       if (xhr.status === 200) { // Got a success response from server!
         const json = JSON.parse(xhr.responseText);
         const restaurants = json;
-        console.log('restaurants: ', restaurants);
         callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
@@ -152,40 +151,6 @@ class DBHelper {
   static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
   }
-
-  /**
-   * Restaurant image URL.
-   */
-  static imageUrlForRestaurant(restaurant) {
-    let src = restaurant.responsive;
-    src = src[src.length - 1].split(' ')[0];
-    return (`img/${src}`);
-  }
-
-  /**
-   * Return set of responsive restaurant JPG images
-   */
-  static imageSourceForRestaurant(restaurant) {
-    let srcset = '';
-    restaurant.responsive.forEach(element => {
-      srcset += `img/${element},`;
-    });
-    return srcset;
-  }
-
-  /**
-   * Return set of responsive restaurant WEBP images
-   * Just replace file extension to webp
-   */
-  // static webpSourceForRestaurant(restaurant) {
-  //   let srcset = '';
-  //   restaurant.responsive.forEach(element => {
-  //     element = element.replace('.jpg', '.webp');
-  //     element = element.replace('.png', '.webp');
-  //     srcset += `img/${element},`;
-  //   });
-  //   return srcset;
-  // }
 
   /**
    * Map marker for a restaurant.
