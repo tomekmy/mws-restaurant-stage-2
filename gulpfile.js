@@ -11,7 +11,9 @@ const del = require('del');
 gulp.task('minify', () => {
   return gulp.src('src/*.html')
     .pipe(htmlmin({
-      collapseWhitespace: true
+      collapseWhitespace: true,
+      minifyJS: true,
+      removeComments: true
     }))
     .pipe(gulp.dest('dist'));
 });
@@ -43,7 +45,7 @@ gulp.task('minify-css', () => {
 
 // Copy images to dist folder
 gulp.task('copy-images', () => {
-  return gulp.src('src/img/*')
+  return gulp.src('src/img/**/*')
     .pipe(gulp.dest('dist/img'));
 });
 
