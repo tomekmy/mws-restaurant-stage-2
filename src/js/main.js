@@ -1,13 +1,12 @@
-let restaurants,
-  neighborhoods,
-  cuisines
-var map
-var markers = []
+let restaurants, neighborhoods, cuisines;
+var map;
+var markers = [];
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
+  updateRestaurants();
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 window.onload = () => {
   // Register service worker
   DBHelper.registerSW();
-  DBHelper.fixMaps();
 };
 
 /**
@@ -30,7 +28,7 @@ fetchNeighborhoods = () => {
       fillNeighborhoodsHTML();
     }
   });
-}
+};
 
 /**
  * Set neighborhoods HTML.
@@ -43,7 +41,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     option.value = neighborhood;
     select.insertAdjacentElement('beforeend', option);
   });
-}
+};
 
 /**
  * Fetch all cuisines and set their HTML.
@@ -57,7 +55,7 @@ fetchCuisines = () => {
       fillCuisinesHTML();
     }
   });
-}
+};
 
 /**
  * Set cuisines HTML.
@@ -71,22 +69,6 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     option.value = cuisine;
     select.insertAdjacentElement('beforeend', option);
   });
-}
-
-/**
- * Initialize Google map, called from HTML.
- */
-window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  updateRestaurants();
 };
 
 /**
@@ -109,8 +91,8 @@ updateRestaurants = () => {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
     }
-  })
-}
+  });
+};
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
@@ -125,13 +107,19 @@ resetRestaurants = (restaurants) => {
   self.markers.forEach(m => m.setMap(null));
   self.markers = [];
   self.restaurants = restaurants;
-}
+};
 
 /**
  * Create all restaurants HTML and add them to the webpage.
  */
+let fillRestaurantsHTML = new Promise((resolve) => {
+  resolve((restaurants = self.restaurants) => {
+
+  });
+});
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
+  let insertRestaurant = '';
   // Remove no restaurants info
   const parent = document.getElementById('main-content-wrapper');
   const child = document.getElementsByClassName('no-restaurants')[0];
@@ -141,13 +129,14 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 
   if (restaurants.length > 0) {
     restaurants.forEach(restaurant => {
-      ul.insertAdjacentElement('beforeend', createRestaurantHTML(restaurant));
+      insertRestaurant = insertRestaurant + createRestaurantHTML(restaurant).outerHTML;
     });
   } else {
     // Add info text when no restaurants found
-    ul.insertAdjacentHTML('beforebegin', '<h4 class="no-restaurants">No restaurants found:(</h4>');
+    ul.innerHTML = '<h4 class="no-restaurants">No restaurants found:(</h4>';
   }
-  addMarkersToMap();
+  ul.innerHTML = insertRestaurant;
+  // addMarkersToMap();
 };
 
 /**
@@ -160,11 +149,11 @@ createRestaurantHTML = (restaurant) => {
    */
   const picture = document.createElement('picture');
   const sizes = '(min-width: 2300px) 800px, (min-width: 1470px) 600px, (min-width: 1120px) 350px, (min-width: 960px) 600px, (min-width: 680px) 350px';
-  picture.insertAdjacentHTML('beforeend', `
-    <source type="image/webp" sizes="${sizes}" srcset="img/${restaurant.photograph}_small.webp 350w, img/${restaurant.photograph}_medium.webp 600w, img/${restaurant.photograph}_large.webp 600w">
-    <source sizes="${sizes}" srcset="img/${restaurant.photograph}_small.jpg 350w, img/${restaurant.photograph}_medium.jpg 600w, img/${restaurant.photograph}_large.jpg 600w">
-    <img class="restaurant-img" src="img/${restaurant.photograph}.jpg" alt="${restaurant.name}">
-  `);
+  picture.innerHTML = `
+    <source type="image/webp" sizes="${sizes}" data-srcset="img/${restaurant.photograph}_small.webp 350w, img/${restaurant.photograph}_medium.webp 600w, img/${restaurant.photograph}_large.webp 600w">
+    <source sizes="${sizes}" data-srcset="img/${restaurant.photograph}_small.jpg 350w, img/${restaurant.photograph}_medium.jpg 600w, img/${restaurant.photograph}_large.jpg 600w">
+    <img class="lazyload restaurant-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYAQMAAACguBAzAAAAA1BMVEXz8/ML3eGLAAAAUElEQVR42u3BAQEAAACCoP6vbojAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACDg7LgAAfCRwpsAAAAASUVORK5CYII=" data-src="img/${restaurant.photograph}.jpg" alt="${restaurant.name}">
+  `;
   li.insertAdjacentElement('beforeend', picture);
 
   const name = document.createElement('h3');
@@ -183,9 +172,8 @@ createRestaurantHTML = (restaurant) => {
   more.innerHTML = 'View Details';
   more.setAttribute('role', 'button');
   more.setAttribute('aria-label', `${restaurant.name}. View details`);
-  more.href = DBHelper.urlForRestaurant(restaurant);
+  more.href = `./restaurant.html?id=${restaurant.id}`;
   li.insertAdjacentElement('beforeend', more);
-
   return li;
 };
 

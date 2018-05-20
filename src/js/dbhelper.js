@@ -1,3 +1,7 @@
+// Lazy loading configuration
+window.lazySizesConfig = window.lazySizesConfig || {};
+window.lazySizesConfig.expand = 20;
+
 /**
  * Common database helper functions.
  */
@@ -146,20 +150,13 @@ class DBHelper {
   }
 
   /**
-   * Restaurant page URL.
-   */
-  static urlForRestaurant(restaurant) {
-    return (`./restaurant.html?id=${restaurant.id}`);
-  }
-
-  /**
    * Map marker for a restaurant.
    */
   static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
       title: restaurant.name + ' restaurant map marker',
-      url: DBHelper.urlForRestaurant(restaurant),
+      url: `./restaurant.html?id=${restaurant.id}`,
       map: map,
       animation: google.maps.Animation.DROP
     });
