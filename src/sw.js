@@ -24,7 +24,7 @@ if (workbox) {
 
   // Cache restaurants requests
   workbox.routing.registerRoute(
-    new RegExp('http://(.*)restaurants'),
+    new RegExp('http://localhost:1337/restaurants'),
     workbox.strategies.networkFirst()
   );
 
