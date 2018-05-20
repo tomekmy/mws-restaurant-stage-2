@@ -168,24 +168,8 @@
     <footer id="footer">
       Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
-    <script>
-      // Initialize Google Maps API
-      window.initMap = () => {
-        let loc = {
-          lat: 40.722216,
-          lng: -73.987501
-        };
-        self.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: loc,
-          scrollwheel: false
-        });
-        google.maps.event.addListenerOnce(self.map, 'idle', function(){
-          addMarkersToMap();
-          DBHelper.fixMaps();
-        });
-      };
-    </script>
+    <!-- Initialize Google Maps API -->
+    <script>window.initMap=(()=>{self.map=new google.maps.Map(document.getElementById("map"),{zoom:12,center:{lat:40.722216,lng:-73.987501},scrollwheel:!1}),google.maps.event.addListenerOnce(self.map,"idle",function(){addMarkersToMap(),DBHelper.fixMaps()})});</script>
     <script defer type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
     <script defer type="application/javascript" charset="utf-8" src="js/main.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTyFdrSH8mZ6JHxnR2YBK6NSVSOZgg8Ug&libraries=places&callback=initMap"></script>    
