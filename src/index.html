@@ -14,13 +14,126 @@
     <meta name="msapplication-TileImage" content="img/icons/mstile-144x144.png">
     <meta name="theme-color" content="#00549c">
     <link rel="manifest" href="manifest.json">
-    <!-- Normalize.css for better cross-browser consistency -->
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css">
+    <!-- CSS critical path -->
+    <style>
+      @charset "utf-8";body{font-family:'Open Sans',sans-serif;color:#333;line-height:1.5;background-color:#f3f3f3;margin:0;position:relative}html,body{height:100%}:focus{outline:2px dashed red}a{color:#ffffff;text-decoration:none}h1,h2{margin:0 0 1.250em}header,nav,section{display:block}#wrapper{min-height:100%;margin-bottom:-4.063rem}#maincontent{background-color:#f3f3f3;min-height:100%}nav{display:table;width:100%;height:4em;background-color:#252831;text-align:center}nav h1{display:table-cell;vertical-align:middle;margin:auto}nav h1 a{color:#fff;font-size:0.8em;font-weight:300;letter-spacing:0.3em;text-transform:uppercase}#map{height:25.000em;width:100%;background-color:#ccc}.filter-options{width:100%;background-color:#00549c;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.filter-options h2{color:white;font-size:1em;font-weight:normal;line-height:1;margin:0 1.250em;padding-top:0.85em}.filter-options select{background-color:white;border:1px solid #fff;font-size:0.92em;height:2.5em;letter-spacing:0;margin:0.625em;padding:0 0.625em;width:calc(100% - 1.25em)}#restaurants-list{display:grid;grid-template-columns:1fr;grid-gap:2em;justify-items:center;max-width:4000px;background-color:#f3f3f3;list-style:outside none none;margin:3em 2% 6em;padding:0}@media (min-width:27.813em){.filter-options select{width:12.5em}}@media (min-width:30em){nav{height:5em}nav h1 a{font-size:0.9em;letter-spacing:0.55em}}@media (min-width:42.5em){nav h1 a{font-size:1.17em;letter-spacing:0.625em}#restaurants-list{grid-template-columns:1fr 1fr}}@media (min-width:70em){#restaurants-list{grid-template-columns:1fr 1fr 1fr}}@media (min-width:200em){body{font-size:1.6em}#restaurants-list{grid-template-columns:1fr 1fr 1fr 1fr}}@media (min-width:250em){body{font-size:2em}#restaurants-list{margin:3em auto 6em}}
+    </style>
     <!-- Google Web Font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Main CSS file -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel="stylesheet" href="css/styles.css">
+    </noscript>
     <title>Restaurant Reviews</title>
+    <script>
+      /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+          /* This file is meant as a standalone workflow for
+          - testing support for link[rel=preload]
+          - enabling async CSS loading in browsers that do not support rel=preload
+          - applying rel preload css once loaded, whether supported or not.
+          */
+          (function( w )
+          {
+              "use strict";
+              // rel=preload support test
+              if( !w.loadCSS ){
+                  w.loadCSS = function(){};
+              }
+              // define on the loadCSS obj
+              var rp = loadCSS.relpreload = {};
+              // rel=preload feature support test
+              // runs once and returns a function for compat purposes
+              rp.support = (function(){
+                  var ret;
+                  try {
+                      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+                  } catch (e) {
+                      ret = false;
+                  }
+                  return function(){
+                      return ret;
+                  };
+              })();
+  
+              // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+              // then change that media back to its intended value on load
+              rp.bindMediaToggle = function( link ){
+                  // remember existing media attr for ultimate state, or default to 'all'
+                  var finalMedia = link.media || "all";
+  
+                  function enableStylesheet(){
+                      link.media = finalMedia;
+                  }
+  
+                  // bind load handlers to enable media
+                  if( link.addEventListener ){
+                      link.addEventListener( "load", enableStylesheet );
+                  } else if( link.attachEvent ){
+                      link.attachEvent( "onload", enableStylesheet );
+                  }
+  
+                  // Set rel and non-applicable media type to start an async request
+                  // note: timeout allows this to happen async to let rendering continue in IE
+                  setTimeout(function(){
+                      link.rel = "stylesheet";
+                      link.media = "only x";
+                  });
+                  // also enable media after 3 seconds,
+                  // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                  setTimeout( enableStylesheet, 3000 );
+              };
+  
+              // loop through link elements in DOM
+              rp.poly = function(){
+                  // double check this to prevent external calls from running
+                  if( rp.support() ){
+                      return;
+                  }
+                  var links = w.document.getElementsByTagName( "link" );
+                  for( var i = 0; i < links.length; i++ ){
+                      var link = links[ i ];
+                      // qualify links to those with rel=preload and as=style attrs
+                      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+                          // prevent rerunning on link
+                          link.setAttribute( "data-loadcss", true );
+                          // bind listeners to toggle media back
+                          rp.bindMediaToggle( link );
+                      }
+                  }
+              };
+  
+              // if unsupported, run the polyfill
+              if( !rp.support() ){
+                  // run once at least
+                  rp.poly();
+  
+                  // rerun poly on an interval until onload
+                  var run = w.setInterval( rp.poly, 500 );
+                  if( w.addEventListener ){
+                      w.addEventListener( "load", function(){
+                          rp.poly();
+                          w.clearInterval( run );
+                      } );
+                  } else if( w.attachEvent ){
+                      w.attachEvent( "onload", function(){
+                          rp.poly();
+                          w.clearInterval( run );
+                      } );
+                  }
+              }
+  
+  
+              // commonjs
+              if( typeof exports !== "undefined" ){
+                  exports.loadCSS = loadCSS;
+              }
+              else {
+                  w.loadCSS = loadCSS;
+              }
+          }( typeof global !== "undefined" ? global : this ) );
+      </script>
   </head>
 
   <body>
@@ -55,10 +168,28 @@
     <footer id="footer">
       Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
-    <script src="js/lazysizes.min.js" async=""></script>
+    <script>
+      // Initialize Google Maps API
+      window.initMap = () => {
+        let loc = {
+          lat: 40.722216,
+          lng: -73.987501
+        };
+        self.map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: loc,
+          scrollwheel: false
+        });
+        google.maps.event.addListenerOnce(self.map, 'idle', function(){
+          addMarkersToMap();
+          DBHelper.fixMaps();
+        });
+      };
+    </script>
     <script defer type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
     <script defer type="application/javascript" charset="utf-8" src="js/main.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTyFdrSH8mZ6JHxnR2YBK6NSVSOZgg8Ug&libraries=places&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTyFdrSH8mZ6JHxnR2YBK6NSVSOZgg8Ug&libraries=places&callback=initMap"></script>    
+    <script async src="js/lazysizes.min.js"></script>    
 
   </body>
 </html>
