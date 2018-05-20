@@ -20,7 +20,7 @@ gulp.task('minify', () => {
 gulp.task('uglify', function () {
   return gulp.src('src/js/*.js')
     .pipe(gulp.dest('dist/js'))
-    .pipe(uglify(/* options */))
+    .pipe(uglify( /* options */ ))
     .pipe(gulp.dest('dist/js'));
 });
 
@@ -28,14 +28,16 @@ gulp.task('uglify', function () {
 gulp.task('uglify-sw', function () {
   return gulp.src('src/sw.js')
     .pipe(gulp.dest('dist'))
-    .pipe(uglify(/* options */))
+    .pipe(uglify( /* options */ ))
     .pipe(gulp.dest('dist'));
 });
 
 // Minify css files
 gulp.task('minify-css', () => {
   return gulp.src('src/css/*.css')
-    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(cleanCSS({
+      compatibility: 'ie8'
+    }))
     .pipe(gulp.dest('dist/css'));
 });
 
@@ -53,40 +55,49 @@ gulp.task('copy-manifest', () => {
 
 // Clean files
 gulp.task('clean', () => {
-  return del('dist', { force: true });
+  return del('dist', {
+    force: true
+  });
 });
 
-// Watch html files
-gulp.watch('src/*.html', (event) => {
-  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  gulp.start(['minify']);
-});
+// Run all task: gulp, gulp dev
+const defaultTask = () => {
+  // Watch html files
+  gulp.watch('src/*.html', (event) => {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    gulp.start(['minify']);
+  });
 
-// Watch js files
-gulp.watch('src/js/*.js', (event) => {
-  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  gulp.start(['uglify']);
-});
+  // Watch js files
+  gulp.watch('src/js/*.js', (event) => {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    gulp.start(['uglify']);
+  });
 
-// Watch service worker file
-gulp.watch('src/sw.js', (event) => {
-  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  gulp.start(['uglify-sw']);
-});
+  // Watch service worker file
+  gulp.watch('src/sw.js', (event) => {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    gulp.start(['uglify-sw']);
+  });
 
-// Watch manifest.json file
-gulp.watch('src/manifest.json', (event) => {
-  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  gulp.start(['copy-manifest']);
-});
+  // Watch manifest.json file
+  gulp.watch('src/manifest.json', (event) => {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    gulp.start(['copy-manifest']);
+  });
 
-// Watch css files
-gulp.watch('src/css/*.css', (event) => {
-  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  gulp.start(['minify-css']);
-});
-
-// Run all task
-gulp.task('default', () => {
+  // Watch css files
+  gulp.watch('src/css/*.css', (event) => {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    gulp.start(['minify-css']);
+  });
   runSequence('clean', ['minify', 'uglify', 'uglify-sw', 'minify-css', 'copy-images', 'copy-manifest']);
-});
+};
+gulp.task('default', defaultTask);
+gulp.task('dev', defaultTask);
+
+// Run all task: gulp build
+const buildTask = () => {
+  runSequence('clean', ['minify', 'uglify', 'uglify-sw', 'minify-css', 'copy-images', 'copy-manifest']);
+};
+gulp.task('build', buildTask);
